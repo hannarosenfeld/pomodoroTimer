@@ -13,6 +13,7 @@
          var breakLength
          var minutesInterval
          var secondsInterval
+         var timerIsRunning = null
          
          const init = () => {
              setDefaults()
@@ -63,11 +64,14 @@
              }
          }
 
+         function resetSession(){
+             clearSessionInterval()
+             setDefaults()
+         }
+
          function clearSessionInterval(){
-             console.log('ya')
              clearInterval(minutesInterval)
              clearInterval(secondsInterval)
-             setDefaults()
          }
 
          function breakDown() {
@@ -85,8 +89,7 @@
                  document.getElementById('time-left').innerHTML = pad(breakLength) + ':' + pad(seconds)
                  if (seconds <= 0){
                      if (breakLength <= 0) {
-                         clearInterval(minutesInterval)
-                         clearInterval(secondsInterval)
+                         clearSessionInterval()
                          document.getElementById('beep').play()
                      }
                      seconds = 60
@@ -110,8 +113,7 @@
                  document.getElementById('time-left').innerHTML = pad(minutes) + ':' + pad(seconds)
                  if (seconds <= 0){
                      if (minutes <= 0) {
-                         clearInterval(minutesInterval)
-                         clearInterval(secondsInterval)
+                         clearSessionInterval()
                          document.getElementById('beep').play()
                          breakDown()
                      }
@@ -145,7 +147,7 @@
                 <div>
                     <audio id="beep" src="goa.WAV"></audio>
                     <button id="start_stop" onclick="countDown()">start/stop</button>
-                    <button id="reset" onclick="clearSessionInterval()">reset</button>
+                    <button id="reset" onclick="resetSession()">reset</button>
                 </div>
             </div>
         </div>
