@@ -113,9 +113,16 @@ function toggleStartStop() {
 }
 
 function countDown() {
+    if (seconds === '00') {
+        seconds = 59
+    }
+
+    if (minutes === sessionLength) {
+        minutes = minutes - 1
+    }
+
     document.getElementById('session-increment').disabled = true
     document.getElementById('session-decrement').disabled = true
-    
     document.getElementById('time-left').innerHTML = minutes + ':' + seconds
     minutesInterval = setInterval(minutesTimer, 60000)
     secondsInterval = setInterval(secondsTimer, 1000)
