@@ -42,7 +42,7 @@
          }
 
          function incrementSessionLength() {
-             if (sessionLength >= 59) {
+             if (sessionLength <= 59) {
                  sessionLength += 1
                  document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
                  document.getElementById('session-length').innerHTML = sessionLength
@@ -142,11 +142,10 @@
             <div id="timer-box">
                 <div id="timer-label" class="label">Session</div>
                 <div id="time-left"></div>
-                <div id="start_stop">
+                <div>
                     <audio id="beep" src="goa.WAV"></audio>
-                    <button id="start" onclick="countDown()">start</button>
-                    <button id="stop">stop</button>
-                    <button id="reset" onclick="clearSessionInterval()">reset</div>
+                    <button id="start_stop" onclick="countDown()">start/stop</button>
+                    <button id="reset" onclick="clearSessionInterval()">reset</button>
                 </div>
             </div>
         </div>
