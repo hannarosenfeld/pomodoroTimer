@@ -25,6 +25,7 @@ function setDefaults() {
     document.getElementById('break-length').innerHTML = breakLength
 }
 
+
 function decrementSessionLength() {
     if (sessionLength >=2) {
         sessionLength -= 1
@@ -60,6 +61,8 @@ function resetSession(){
     document.getElementById('session-decrement').disabled = false
     clearSessionInterval()
     setDefaults()
+    document.getElementById('beep').pause()
+    document.getElementById('beep').currentTime = 0
 }
 
 function clearSessionInterval(){
