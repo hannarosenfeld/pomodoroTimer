@@ -90,6 +90,9 @@ function breakDown() {
 }
 
 function countDown() {
+    document.getElementById('session-increment').disabled = true
+    document.getElementById('session-decrement').disabled = true
+    
     minutes = pad(sessionLength - 1)
     seconds = 59
     document.getElementById('time-left').innerHTML = minutes + ':' + seconds
