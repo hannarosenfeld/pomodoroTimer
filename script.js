@@ -76,6 +76,7 @@ function clearSessionInterval(){
 }
 
 function breakDown() {
+
     breakLength = pad(breakLength - 1)
     seconds = 59
     document.getElementById('time-left').innerHTML = breakLength + ':' + '00'
@@ -135,6 +136,7 @@ function countDown() {
             if (minutes <= 0) {
                 clearSessionInterval()
                 document.getElementById('beep').play()
+                document.getElementById('timer-label').innerHTML = 'Break'
                 breakDown()
             }
             seconds = 60
