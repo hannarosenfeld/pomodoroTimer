@@ -31,6 +31,9 @@ function decrementSessionLength() {
         document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
         document.getElementById('session-length').innerHTML = sessionLength
     }
+
+    minutes = sessionLength
+    return minutes
 }
 
 function incrementSessionLength() {
@@ -39,6 +42,8 @@ function incrementSessionLength() {
         document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
         document.getElementById('session-length').innerHTML = sessionLength
     }
+    minutes = sessionLength
+    return minutes
 }
 
 function decrementBreakLength() {
@@ -111,8 +116,6 @@ function countDown() {
     document.getElementById('session-increment').disabled = true
     document.getElementById('session-decrement').disabled = true
     
-    minutes = pad(sessionLength - 1)
-    seconds = 59
     document.getElementById('time-left').innerHTML = minutes + ':' + seconds
     minutesInterval = setInterval(minutesTimer, 60000)
     secondsInterval = setInterval(secondsTimer, 1000)
