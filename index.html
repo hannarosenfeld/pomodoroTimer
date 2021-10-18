@@ -10,6 +10,7 @@
          var minutes = 25
          var seconds = '00'
          var sessionLength = 25
+         var breakLength = 5
          
          const init = () => {
              setDefaults()
@@ -37,11 +38,25 @@
              }
          }
 
-         function increaseSessionLength() {
+         function incrementSessionLength() {
              if (sessionLength >= 59) {
                  sessionLength += 1
                  document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
                  document.getElementById('session-length').innerHTML = sessionLength
+             }
+         }
+         
+         function decrementBreakLength() {
+             if (breakLength !== 1) {
+                 breakLength -= 1
+                 document.getElementById('break-length').innerHTML = breakLength
+             }
+         }
+
+         function incrementBreakLength() {
+             if (breakLength < 60) {
+                 breakLength += 1
+                 document.getElementById('break-length').innerHTML = breakLength
              }
          }
 
@@ -76,14 +91,14 @@
             <div id="break-box">
                 <div id="break-label">Break Length</div>
                 <div id="break-length"></div>
-                <button id="break-decrement">-</button>
-                <button id="break-increment">+</button>
+                <button id="break-decrement" onclick="decrementBreakLength()">-</button>
+                <button id="break-increment" onclick="incrementBreakLength()">+</button>
             </div>
             <div id="session-box">
                 <div id="session-label">Session Length</div>
                 <div id="session-length"></div>
                 <button id="session-decrement" onclick="decrementSessionLength()">-</button>
-                <button id="session-increment">+</button>
+                <button id="session-increment" onclick="incrementSessionLength()">+</button>
             </div>
             <div id="timer-box">
                 <div id="timer-label">Session</div>
