@@ -7,11 +7,16 @@
         <link rel="stylesheet" href="styles.css">
         <title>pomodoroClock</title>
         <script>
-         var minutes = '25'
+         var minutes = 25
          var seconds = '00'
+         var sessionLength = 25
          
          const init = () => {
              setDefaults()
+         }
+
+         function pad(val) {
+             return ('00' + val).slice(-2)
          }
 
          function setDefaults() {
@@ -24,32 +29,35 @@
              sessionLength.innerHTML = minutes
          }
 
+         function decrementSessionLength() {
+             if (sessionLength >=1) {
+                 sessionLength -= 1
+                 document.getElementById('time-left').innerHTML = sessionLength + ':' + seconds
+                 document.getElementById('session-length').innerHTML = sessionLength
+             }
+         }
+
+         function increaseSessionLength() {
+
+         }
+
          function countDown() {
              minutes = 24
              seconds = 59
-             
              document.getElementById('time-left').innerHTML = minutes + ':' + seconds
-
              var minutes_interval = setInterval(minutesTimer, 60000)
              var seconds_interval = setInterval(secondsTimer, 1000)
-
              function minutesTimer(){
                  minutes -= 1
                  document.getElementById('time-left').innerHTML = minutes + ':' + seconds
-
              }
-             
-             function pad(val) {
-                 return ('00' + val).slice(-2)
-             }
-             
              function secondsTimer(){
                  seconds -= 1
                  document.getElementById('time-left').innerHTML = pad(minutes) + ':' + pad(seconds)
                  if (seconds <= 0){
                      if (minutes <= 0) {
-                         clearInterval(mintuesInterval)
-                         clearInterval(secondsInterval)
+                         clearInterval(mintues_interval)
+                         clearInterval(seconds_interval)
                      }
                      
                      seconds = 60
@@ -71,7 +79,7 @@
             <div id="session-box">
                 <div id="session-label">Session Length</div>
                 <div id="session-length"></div>
-                <button id="session-decrement">-</button>
+                <button id="session-decrement" onclick="decrementSessionLength()">-</button>
                 <button id="session-increment">+</button>
             </div>
             <div id="timer-box">
