@@ -56,6 +56,8 @@ function incrementBreakLength() {
 }
 
 function resetSession(){
+    document.getElementById('session-increment').disabled = false
+    document.getElementById('session-decrement').disabled = false
     clearSessionInterval()
     setDefaults()
 }
