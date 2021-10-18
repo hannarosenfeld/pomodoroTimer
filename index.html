@@ -69,6 +69,31 @@
              clearInterval(secondsInterval)
              setDefaults()
          }
+
+         function breakDown() {
+             breakLength = pad(breakLength - 1)
+             seconds = 59
+             document.getElementById('time-left').innerHTML = breakLength + ':' + '00'
+             minutesInterval = setInterval(minutesTimer, 60000)
+             secondsInterval = setInterval(secondsTimer, 1000)
+             function minutesTimer(){
+                 breakLength > 1 ? breakLength -= 1 : breakLength = breakLength
+                 document.getElementById('time-left').innerHTML = pad(breakLength) + ':' + pad(seconds)
+             }
+             function secondsTimer(){
+                 seconds -= 1
+                 document.getElementById('time-left').innerHTML = pad(breakLength) + ':' + pad(seconds)
+                 if (seconds <= 0){
+                     if (breakLength <= 0) {
+                         clearInterval(minutesInterval)
+                         clearInterval(secondsInterval)
+                         document.getElementById('beep').play()
+                     }
+                     seconds = 60
+                 }
+             }
+
+         }
          
          function countDown() {
              minutes = pad(sessionLength - 1)
@@ -78,7 +103,7 @@
              secondsInterval = setInterval(secondsTimer, 1000)
              function minutesTimer(){
                  minutes -= 1
-                 document.getElementById('time-left').innerHTML = minutes + ':' + seconds
+                 document.getElementById('time-left').innerHTML = pad(minutes) + ':' + pad(seconds)
              }
              function secondsTimer(){
                  seconds -= 1
@@ -88,6 +113,7 @@
                          clearInterval(minutesInterval)
                          clearInterval(secondsInterval)
                          document.getElementById('beep').play()
+                         breakDown()
                      }
                      seconds = 60
                  }
@@ -99,20 +125,22 @@
     </head>
     <body>
         <div id="pomodoro-clock">
+            <div id="controls">
             <div id="break-box">
-                <div id="break-label">Break Length</div>
+                <div id="break-label" class="label">Break Length</div>
                 <div id="break-length"></div>
                 <button id="break-decrement" onclick="decrementBreakLength()">-</button>
                 <button id="break-increment" onclick="incrementBreakLength()">+</button>
             </div>
             <div id="session-box">
-                <div id="session-label">Session Length</div>
+                <div id="session-label" class="label">Session Length</div>
                 <div id="session-length"></div>
                 <button id="session-decrement" onclick="decrementSessionLength()">-</button>
                 <button id="session-increment" onclick="incrementSessionLength()">+</button>
             </div>
+            </div>
             <div id="timer-box">
-                <div id="timer-label">Session</div>
+                <div id="timer-label" class="label">Session</div>
                 <div id="time-left"></div>
                 <div id="start_stop">
                     <audio id="beep" src="goa.WAV"></audio>
