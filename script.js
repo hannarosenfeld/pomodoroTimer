@@ -29,8 +29,8 @@ function decrementSessionLength() {
     if (sessionLength >=2) {
         sessionLength -= 1
     }
-    sessionLength = pad(sessionLength)
-    minutes = sessionLength
+
+    minutes = pad(sessionLength)
     
     document.getElementById('time-left').innerHTML = minutes + ':' + seconds
     document.getElementById('session-length').innerHTML = sessionLength
@@ -42,7 +42,7 @@ function incrementSessionLength() {
         console.log(sessionLength)
     }
 
-    minutes = sessionLength
+    minutes = pad(sessionLength)
     document.getElementById('time-left').innerHTML = minutes + ':' + seconds
     document.getElementById('session-length').innerHTML = sessionLength
 }
@@ -115,7 +115,7 @@ function countDown() {
     if (seconds === '00') {
         seconds = 59
     }
-    if (minutes === sessionLength) {
+    if (minutes === pad(sessionLength)) {
         minutes = pad(minutes - 1)
     }
 
