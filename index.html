@@ -61,7 +61,7 @@
          }
 
          function countDown() {
-             minutes = 24
+             minutes = pad(sessionLength - 1)
              seconds = 59
              document.getElementById('time-left').innerHTML = minutes + ':' + seconds
              var minutes_interval = setInterval(minutesTimer, 60000)
@@ -77,6 +77,7 @@
                      if (minutes <= 0) {
                          clearInterval(minutes_interval)
                          clearInterval(seconds_interval)
+                         document.getElementById('beep').play()
                      }
                      seconds = 60
                  }
@@ -104,6 +105,7 @@
                 <div id="timer-label">Session</div>
                 <div id="time-left"></div>
                 <div id="start_stop">
+                    <audio id="beep" src="goa.WAV"></audio>
                     <button id="start" onclick="countDown()">start</button>
                     <button id="stop">stop</button>
                     <button id="reset">reset</div>
