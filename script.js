@@ -28,22 +28,23 @@ function setDefaults() {
 function decrementSessionLength() {
     if (sessionLength >=2) {
         sessionLength -= 1
-        document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
-        document.getElementById('session-length').innerHTML = sessionLength
     }
-
+    sessionLength = pad(sessionLength)
     minutes = sessionLength
-    return minutes
+    
+    document.getElementById('time-left').innerHTML = minutes + ':' + seconds
+    document.getElementById('session-length').innerHTML = sessionLength
 }
 
 function incrementSessionLength() {
     if (sessionLength <= 59) {
         sessionLength += 1
-        document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
-        document.getElementById('session-length').innerHTML = sessionLength
+        console.log(sessionLength)
     }
+
     minutes = sessionLength
-    return minutes
+    document.getElementById('time-left').innerHTML = minutes + ':' + seconds
+    document.getElementById('session-length').innerHTML = sessionLength
 }
 
 function decrementBreakLength() {
@@ -104,8 +105,6 @@ function toggleStartStop() {
         countDown()
     } else {
         // else pause
-
-        console.log(minutes, seconds)
         clearSessionInterval()
         minutesInterval = -1
         secondsInterval = -1
@@ -116,9 +115,8 @@ function countDown() {
     if (seconds === '00') {
         seconds = 59
     }
-
     if (minutes === sessionLength) {
-        minutes = minutes - 1
+        minutes = pad(minutes - 1)
     }
 
     document.getElementById('session-increment').disabled = true
