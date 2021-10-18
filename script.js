@@ -2,9 +2,8 @@ var minutes
 var seconds
 var sessionLength
 var breakLength
-var minutesInterval
-var secondsInterval
-var timerIsRunning = null
+var minutesInterval = -1
+var secondsInterval = -1
 
 const init = () => {
     setDefaults()
@@ -92,6 +91,20 @@ function breakDown() {
         }
     }
 
+}
+
+function toggleStartStop() {
+    //if paused start timer
+    if (minutesInterval == -1 && secondsInterval == -1) {
+        countDown()
+    } else {
+        // else pause
+
+        console.log(minutes, seconds)
+        clearSessionInterval()
+        minutesInterval = -1
+        secondsInterval = -1
+    }
 }
 
 function countDown() {
