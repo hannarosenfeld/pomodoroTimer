@@ -30,15 +30,19 @@
          }
 
          function decrementSessionLength() {
-             if (sessionLength >=1) {
+             if (sessionLength >=2) {
                  sessionLength -= 1
-                 document.getElementById('time-left').innerHTML = sessionLength + ':' + seconds
+                 document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
                  document.getElementById('session-length').innerHTML = sessionLength
              }
          }
 
          function increaseSessionLength() {
-
+             if (sessionLength >= 59) {
+                 sessionLength += 1
+                 document.getElementById('time-left').innerHTML = pad(sessionLength) + ':' + seconds
+                 document.getElementById('session-length').innerHTML = sessionLength
+             }
          }
 
          function countDown() {
@@ -59,7 +63,6 @@
                          clearInterval(mintues_interval)
                          clearInterval(seconds_interval)
                      }
-                     
                      seconds = 60
                  }
              }
