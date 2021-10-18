@@ -7,10 +7,12 @@
         <link rel="stylesheet" href="styles.css">
         <title>pomodoroClock</title>
         <script>
-         var minutes = 25
-         var seconds = '00'
-         var sessionLength = 25
-         var breakLength = 5
+         var minutes
+         var seconds
+         var sessionLength
+         var breakLength
+         var minutesInterval
+         var secondsInterval
          
          const init = () => {
              setDefaults()
@@ -21,13 +23,14 @@
          }
 
          function setDefaults() {
-             let timeLeft = document.getElementById('time-left')
-             let breakLength = document.getElementById('break-length')
-             let sessionLength = document.getElementById('session-length')
+             minutes = 25
+             seconds = '00'
+             breakLength = 5
+             sessionLength = 25
 
-             timeLeft.innerHTML = minutes + ':' + seconds
-             breakLength.innerHTML = 5
-             sessionLength.innerHTML = minutes
+             document.getElementById('time-left').innerHTML = minutes + ':' + seconds
+             document.getElementById('session-length').innerHTML = sessionLength
+             document.getElementById('break-length').innerHTML = breakLength
          }
 
          function decrementSessionLength() {
@@ -60,12 +63,19 @@
              }
          }
 
+         function clearSessionInterval(){
+             console.log('ya')
+             clearInterval(minutesInterval)
+             clearInterval(secondsInterval)
+             setDefaults()
+         }
+         
          function countDown() {
              minutes = pad(sessionLength - 1)
              seconds = 59
              document.getElementById('time-left').innerHTML = minutes + ':' + seconds
-             var minutes_interval = setInterval(minutesTimer, 60000)
-             var seconds_interval = setInterval(secondsTimer, 1000)
+             minutesInterval = setInterval(minutesTimer, 60000)
+             secondsInterval = setInterval(secondsTimer, 1000)
              function minutesTimer(){
                  minutes -= 1
                  document.getElementById('time-left').innerHTML = minutes + ':' + seconds
@@ -75,8 +85,8 @@
                  document.getElementById('time-left').innerHTML = pad(minutes) + ':' + pad(seconds)
                  if (seconds <= 0){
                      if (minutes <= 0) {
-                         clearInterval(minutes_interval)
-                         clearInterval(seconds_interval)
+                         clearInterval(minutesInterval)
+                         clearInterval(secondsInterval)
                          document.getElementById('beep').play()
                      }
                      seconds = 60
@@ -108,7 +118,7 @@
                     <audio id="beep" src="goa.WAV"></audio>
                     <button id="start" onclick="countDown()">start</button>
                     <button id="stop">stop</button>
-                    <button id="reset">reset</div>
+                    <button id="reset" onclick="clearSessionInterval()">reset</div>
                 </div>
             </div>
         </div>
