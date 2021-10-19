@@ -116,7 +116,7 @@ function countDown() {
     if (seconds === '00') {
         seconds = 59
     }
-    if (minutes === pad(sessionLength)) {
+    if (minutes === pad(sessionLength) || minutes === sessionLength) {
         minutes = pad(minutes - 1)
     }
 
